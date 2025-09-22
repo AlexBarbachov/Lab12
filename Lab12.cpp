@@ -1,6 +1,7 @@
 #include <iostream>
 #include <array>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -17,13 +18,14 @@ int main()
 
     // quickly output the grades
     cout << "Grades" << endl;
-    for (int i = 0; i < classGrades.size() < i++)
+    for (int i = 0; i < classGrades.size(); i++)
     {
         cout << "Student " << i + 1 << " | " << classGrades.at(i);
     }
 
     // DIFFERENT ARRAY METHODS
-
+    
+    cout << endl;
 
     // will give first and last element respectively 
     cout << "First: " << classGrades.front() << endl;
@@ -32,6 +34,29 @@ int main()
     cout << "Number of Grades: " << classGrades.size() << endl; 
 
 
+    // will check if array is empty or not
+    if (classGrades.empty())
+        cout << "Class is Empty" << endl;
+    else
+        cout << "Class is not Empty" << endl;
+
+
+    // will sort the array
+    sort(classGrades.begin(), classGrades.end());
+    for (int i = 0; i < classGrades.size(); i++)
+        cout << "| " << classGrades.at(i) << " "; 
+    
+
+    cout << endl;
+
+    
+    // create empty array and fill it with 100s
+    array<int, 30> freshGradeBook;
+    freshGradeBook.fill(100);
+    for (int i = 0; i < freshGradeBook.size(); i++)
+        cout << "| " << freshGradeBook.at(i) << " "; 
+
+    
 }
 
 // will read the file and store it into an array: classGrades
@@ -46,11 +71,15 @@ void readGrades(array<int, 30>& classGrades, const string& filename)
     }
 
     int val;
-    for (size_t t; t < classGrades.size(); t++)
+    for (size_t t = 0; t < classGrades.size(); t++)
     {
         if (file >> val)
         {
             classGrades.at(t) = val;
+        }
+        else
+        {
+            classGrades.at(t) = 0;
         }
     }
 
